@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site avec faille XSS</title>
+</head>
+<body>
+    <h1>Bienvenue sur mon site avec une faille XSS</h1>
+
+    <form method="get">
+        <label for="message">Entrez un message :</label><br>
+        <input type="text" id="message" name="message" value=""><br><br>
+        <input type="submit" value="Envoyer">
+    </form>
+
+    <h2>Message soumis :</h2>
+    <p>
+        <!-- Affichage du message soumis par l'utilisateur sans validation ou échappement -->
+        <?php
+            if (isset($_GET['message'])) {
+                echo $_GET['message'];
+            }
+        ?>
+    </p>
+</body>
+</html>
